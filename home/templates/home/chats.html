@@ -1,0 +1,18 @@
+{% extends 'home/home.html' %}
+
+{% block chats %}
+{% if recent_messages %}
+    {% for message in recent_messages %}
+            {% if message.sender.user == request.user %}
+            <div title="you" class='p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-break' style="display: inline-block;">
+                {{ message.text }}
+            </div>
+            {% else %}
+            <div title="{{ message.sender.user.username }}" class='p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 text-break' style="display: inline-block;">
+                {{ message.sender.user.username }}: {{ message.text }}
+            </div>
+            {% endif %}
+            <br><br>
+    {% endfor %}
+{% endif %}
+{% endblock %}
