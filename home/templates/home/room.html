@@ -69,7 +69,6 @@
 
     {% if is_creating %}
         <div id="content">
-            <h2>Create a new room and share it with your friends!</h2>
             {% block create_room %}{% endblock %}
         </div>
     {% elif not room %}
@@ -241,26 +240,6 @@
                 xhr.send();
             }, 2000);
         {% endif %}
-
-        function replyToMessage(username, messageId) {
-            const input = document.getElementById("message-input");
-            const replyMessage = document.getElementById("reply-id");
-            const cancelBtn = document.getElementById('reply-cancel-btn');
-
-            input.placeholder = `Reply to ${username}`;
-            replyMessage.value = messageId;
-            cancelBtn.hidden = false;
-        }
-
-        function cancelReply() {
-            const input = document.getElementById("message-input");
-            const replyMessage = document.getElementById("reply-id");
-            const cancelBtn = document.getElementById('reply-cancel-btn');
-
-            input.placeholder = "Type a message";
-            replyMessage.value = null;
-            cancelBtn.hidden = true;
-        }
     </script>
 </body>
 </html>

@@ -11,6 +11,9 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('home/', views.home_page, name='home_page'),
     path('create/', views.create, name='create'),
-    path('home/room<str:invite_link>/', views.room, name='room'),
-    path('home/send/', views.send, name='send')
+    path('home/room<str:invite_link>/', views.room(False), name='room'),
+    path('home/room<str:invite_link>/ajax', views.room(True), name='room_ajax'),
+    path('home/send/', views.send, name='send'),
+    path('home/leave/', views.leave, name='leave'),
+    path('home/delete-room/', views.delete_room, name='delete_room')
 ]

@@ -12,7 +12,7 @@ class Room(models.Model):
     name = models.TextField(max_length=200)
     invite_link = models.TextField(max_length=36)
     date_created = models.DateTimeField("date created")
-    creator = models.ForeignKey(User, on_delete=models.PROTECT)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -23,6 +23,7 @@ class Member(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     join_date = models.DateTimeField("join date")
     is_admin = models.BooleanField()
+    left = models.BooleanField(default=False)
 
     def __str__(self):
         return ("(!) " if self.is_admin else "") + self.user.username + " in " + self.room.name
@@ -31,7 +32,7 @@ class Member(models.Model):
 class Message(models.Model):
     text = models.TextField(max_length=4000)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    sender = models.ForeignKey(Member, on_delete=models.DO_NOTHING)
+    sender = models.ForeignKey(Member, on_delete=models.PROTECT)
     date = models.DateTimeField("date")
     replied_message = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
 

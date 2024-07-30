@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.admin import ModelAdmin
 from .models import Message, Room, Member, User
 
 
@@ -16,8 +17,12 @@ class UserAdmin(BaseUserAdmin):
     inlines = BaseUserAdmin.inlines + (MemberInline,)
 
 
+class RoomAdmin(ModelAdmin):
+    inlines = (MemberInline,)
+
+
 admin.site.register(Message)
-admin.site.register(Room)
+admin.site.register(Room, RoomAdmin)
 admin.site.register(Member)
 admin.site.register(User, UserAdmin)
 
